@@ -1,0 +1,45 @@
+# =============================
+# Set BrowserStack Credentials
+# =============================
+userName: YOUR_USERNAME
+accessKey: YOUR_ACCESS_KEY
+
+# ======================
+# BrowserStack Reporting
+# ======================
+projectName: BrowserStack Samples
+buildName: appauto-pytest-bdd-appium
+buildIdentifier: '#${BUILD_NUMBER}'
+framework: pytest-bdd
+
+# ==========================================
+# Application under test
+# ==========================================
+# Local path — the SDK uploads BStackSampleApp.ipa and rewrites it to bs://<id>.
+app: ./BStackSampleApp.ipa
+
+# =======================================
+# Platforms (Devices to test)
+# =======================================
+platforms:
+  - deviceName: iPhone 14 Pro
+    osVersion: "16"
+    platformName: ios
+
+# =======================
+# Parallels per Platform
+# =======================
+parallelsPerPlatform: 1
+
+source: pytest-bdd-appium-app-browserstack:sample-sdk:v1.0
+
+# ======================
+# Test Observability
+# ======================
+testObservability: true
+
+# ===================
+# Debugging features
+# ===================
+debug: true
+networkLogs: true
