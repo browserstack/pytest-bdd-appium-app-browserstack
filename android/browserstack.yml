@@ -35,7 +35,7 @@ platforms:
 # =======================
 parallelsPerPlatform: 1
 
-source: pytest-bdd-appium-app-browserstack:sample-sdk:v1.0
+source: pytest-bdd:appium-sample-sdk:v1.0
 
 # ======================
 # Test Observability
