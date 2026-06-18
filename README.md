@@ -28,7 +28,7 @@ fixture), `features/` (Gherkin), `tests/` (pytest-bdd step definitions), and
 
 ```bash
 git clone <this-repo>
-cd pytest-bdd-appium/android      # or: cd pytest-bdd-appium/ios
+cd pytest-bdd-appium-app-browserstack/android      # or: cd pytest-bdd-appium-app-browserstack/ios
 
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
