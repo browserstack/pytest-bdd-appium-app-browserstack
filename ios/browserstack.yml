@@ -1,0 +1,52 @@
+# =============================
+# Set BrowserStack Credentials
+# =============================
+userName: YOUR_USERNAME
+accessKey: YOUR_ACCESS_KEY
+
+# ======================
+# BrowserStack Reporting
+# ======================
+projectName: BrowserStack Samples
+buildName: appauto-pytest-bdd-appium
+buildIdentifier: '#${BUILD_NUMBER}'
+framework: pytest-bdd
+
+# ==========================================
+# Application under test
+# ==========================================
+# Public sample app committed in this repo; the SDK uploads it at run time (works on any account).
+# NOTE: App Automate installs ONE app per build. The local scenario uses ./LocalSample.ipa and must
+# run as a SEPARATE build (set app: ./LocalSample.ipa for that run) — see README "Run Local Test".
+app: ./BStackSampleApp.ipa
+
+# =======================================
+# Platforms (Devices to test)
+# =======================================
+platforms:
+  - deviceName: iPhone 14 Pro
+    osVersion: "16"
+    platformName: ios
+
+# =======================
+# Parallels per Platform
+# =======================
+parallelsPerPlatform: 1
+
+# ==========================================
+# BrowserStack Local (used by the local scenario / tests/test_local.py)
+# ==========================================
+browserstackLocal: true
+
+source: pytest-bdd:appium-sample-sdk:v1.0
+
+# ======================
+# Test Observability
+# ======================
+testObservability: true
+
+# ===================
+# Debugging features
+# ===================
+debug: true
+networkLogs: true
