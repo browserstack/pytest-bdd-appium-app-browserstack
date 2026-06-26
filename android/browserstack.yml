@@ -18,8 +18,9 @@ framework: pytest-bdd
 # ==========================================
 # Application under test
 # ==========================================
-# Pre-uploaded WikipediaSample.apk. Use a local path (./WikipediaSample.apk) to
-# Public sample app committed in this repo (relative path); the SDK uploads it at run time.
+# Public sample app committed in this repo; the SDK uploads it at run time (works on any account).
+# NOTE: App Automate installs ONE app per build. The local scenario uses ./LocalSample.apk and must
+# run as a SEPARATE build (set app: ./LocalSample.apk for that run) — see README "Run Local Test".
 app: ./WikipediaSample.apk
 
 # =======================================
@@ -34,6 +35,11 @@ platforms:
 # Parallels per Platform
 # =======================
 parallelsPerPlatform: 1
+
+# ==========================================
+# BrowserStack Local (used by the local scenario / tests/test_local.py)
+# ==========================================
+browserstackLocal: true
 
 source: pytest-bdd:appium-sample-sdk:v1.0
 

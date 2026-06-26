@@ -1,8 +1,8 @@
 # Runs the BrowserStack SDK sample against a given commit and reports a status check.
 # Trigger: Actions tab -> "pytest-bdd Appium App Automate SDK sample test" -> Run workflow -> paste the PR's full commit SHA.
 # Requires repo secrets: BROWSERSTACK_USERNAME, BROWSERSTACK_ACCESS_KEY.
-# NOTE (App Automate): the app under test is referenced via `app: bs://...` in browserstack.yml;
-# ensure that uploaded app exists on the account whose secrets are used (re-upload + update if expired).
+# NOTE (App Automate): the sample app is committed in the repo and referenced by relative path
+# (app: ./WikipediaSample.apk); the SDK uploads it at run time, so no pre-uploaded bs:// id is needed.
 name: pytest-bdd Appium App Automate SDK sample test
 
 on:

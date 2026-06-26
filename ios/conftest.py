@@ -1,5 +1,3 @@
-import os
-
 import pytest
 from appium import webdriver
 from appium.options.ios import XCUITestOptions
@@ -9,14 +7,11 @@ from appium.options.ios import XCUITestOptions
 def driver(request):
     """Appium driver fixture shared by the pytest-bdd step definitions.
 
-    The BrowserStack SDK injects the app + device capabilities from
-    browserstack.yml, so an empty XCUITestOptions object is enough.
+    Under `browserstack-sdk pytest`, the SDK injects the app, device, and
+    credentials from browserstack.yml (or the BROWSERSTACK_USERNAME /
+    BROWSERSTACK_ACCESS_KEY env vars), so a bare XCUITestOptions() is enough.
     """
     options = XCUITestOptions()
-    options.set_capability("bstack:options", {
-        "userName": os.environ.get("BROWSERSTACK_USERNAME", "YOUR_USERNAME"),
-        "accessKey": os.environ.get("BROWSERSTACK_ACCESS_KEY", "YOUR_ACCESS_KEY"),
-    })
     drv = webdriver.Remote("https://hub.browserstack.com/wd/hub", options=options)
     yield drv
     drv.quit()

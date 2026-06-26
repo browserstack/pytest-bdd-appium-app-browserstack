@@ -20,9 +20,10 @@ fixture), `features/` (Gherkin), `tests/` (pytest-bdd step definitions), and
 
 - A [BrowserStack](https://www.browserstack.com/) account (username + access key).
 - Python 3.8+.
-- An application to test. The Android directory is pre-wired to a pre-uploaded
-  `WikipediaSample.apk` (`bs://...`); the iOS directory uploads
-  `BStackSampleApp.ipa` from a local path.
+- An application to test. Both directories reference their public sample app by
+  **local path** (`app: ./WikipediaSample.apk` / `./BStackSampleApp.ipa`) — the SDK
+  uploads it at run time, so the sample works on any account (no pre-uploaded
+  `bs://` id required).
 
 ## Setup
 
@@ -46,32 +47,36 @@ export BROWSERSTACK_ACCESS_KEY="YOUR_ACCESS_KEY"
 From inside `android/`:
 
 ```bash
-browserstack-sdk pytest -s tests/
+browserstack-sdk pytest -s tests/test_sample.py
 ```
 
 This runs the **Wikipedia search** scenario on a real Samsung Galaxy S22 Ultra:
-tap "Search Wikipedia", type "BrowserStack", and assert results are returned.
-It also runs the **local** scenario (LocalSample.apk over the BrowserStack Local
-tunnel — `browserstackLocal: true`).
-
-To run a single scenario:
-
-```bash
-browserstack-sdk pytest -s tests/test_sample.py
-```
+tap "Search Wikipedia", type "BrowserStack", and assert matching results are returned.
 
 ## Run Sample Test (iOS)
 
 From inside `ios/`:
 
 ```bash
-browserstack-sdk pytest -s tests/
+browserstack-sdk pytest -s tests/test_sample.py
 ```
 
 ## Run Local Test
 
-The local scenarios (`tests/test_local.py`) exercise BrowserStack Local. With
-`browserstackLocal: true` in `browserstack.yml` the SDK starts the Local tunnel
+The local scenario (`tests/test_local.py`) exercises **BrowserStack Local**. Because
+App Automate installs **one app per build**, the local scenario is a *separate* build
+that runs against the **local** sample app (`LocalSample.apk` / `LocalSample.ipa`,
+committed alongside the main app) — it cannot share a build with the Wikipedia/BStack
+sample. To run it, point `app:` at the local build in `browserstack.yml`, then run only
+the local test:
+
+```bash
+# android/ — set `app: ./LocalSample.apk` in browserstack.yml, then:
+browserstack-sdk pytest -s tests/test_local.py
+# ios/ — set `app: ./LocalSample.ipa`, then run the same command
+```
+
+`browserstackLocal: true` (already set in `browserstack.yml`) starts the Local tunnel
 automatically — no separate binary to launch.
 
 ## Notes / Dashboard

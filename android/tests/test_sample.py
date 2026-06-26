@@ -29,4 +29,5 @@ def search_wikipedia(driver, query):
 @then("search results are displayed")
 def results_displayed(driver):
     results = driver.find_elements(AppiumBy.CLASS_NAME, "android.widget.TextView")
-    assert len(results) > 0
+    # Assert the search actually returned matching results — not merely that the app rendered.
+    assert any("BrowserStack" in (r.text or "") for r in results), "no search result matched the query"
